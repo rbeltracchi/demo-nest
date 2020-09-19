@@ -61,19 +61,25 @@ function mostrarTablaCompras() {
 
 async function load() {
     let container = document.querySelector("#use-ajax");
-    container.innerHTML = "<h1>Loading...</h1>";
+    let h1 = document.createElement('h1');
+    h1.innerHTML = 'Loading';
+    container.appendChild(h1);
     try {
-        let response = await fetch(url);
+        let response = await fetch('/productos');
         if (response.ok) {
-            let t = await response.json()
-            container.innerHTML = t;
+            let t = await response.json();
+            console.log(t);
+            compras = [...compras, ...t];
         }
         else
             container.innerHTML = "<h1>Error - Failed URL!</h1>";
     }
     catch (response) {
+        console.log(response);
         container.innerHTML = "<h1>Connection error</h1>";
     };
+
+    mostrarTablaCompras();
 }
 
 load();
