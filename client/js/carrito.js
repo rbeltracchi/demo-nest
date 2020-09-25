@@ -78,7 +78,7 @@ async function load() {
         console.log(response);
         container.innerHTML = "<h1>Connection error</h1>";
     };
-
+    h1.parentNode.removeChild(h1);
     mostrarTablaCompras();
 }
 
