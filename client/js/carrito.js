@@ -7,19 +7,32 @@ let compras = [];
 
 //#########################################
 
-function agregar() {
+async function agregar() {
     console.log("Funcion Agregar");
     let producto = document.querySelector('#producto').value;
     let precio = parseInt(document.querySelector('#precio').value);
+    console.log(producto,precio);
 
     let renglon = {
-        "producto": producto,
+        "nombreProducto": producto,
         "precio": precio
     }
-    compras.push(renglon);
+    
+    let respuesta = await fetch('http://localhost:3000/productos',{
+		method: 'POST',	
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(renglon)
+	});
 
-    mostrarTablaCompras();
-
+    if (respuesta.ok) {
+        compras.push(renglon);
+        mostrarTablaCompras();
+    }else{
+        console.log('hubo un error');
+    }
+    
 }
 
 //#########################################
@@ -51,7 +64,7 @@ function mostrarTablaCompras() {
     for (let r of compras) {
         html += `
         <tr>
-        <td>${r.producto}</td>
+        <td>${r.nombreProducto}</td>
         <td>${r.precio}</td>
         </tr>
         `;
