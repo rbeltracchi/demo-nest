@@ -51,7 +51,7 @@ function mostrarTablaCompras() {
     for (let r of compras) {
         html += `
         <tr>
-        <td>${r.producto}</td>
+        <td>${r.nombreProducto}</td>
         <td>${r.precio}</td>
         </tr>
         `;
