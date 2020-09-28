@@ -26,8 +26,8 @@ export class ProductoService {
     }
 
     public getProducto(index: number): Producto {
-        this.loadProductos(); n
-        console.log(this.listaProductos); n
+        this.loadProductos(); 
+        console.log(this.listaProductos); 
         // Más adelante agregar manejo de status code
         if (index < 0 || index >= this.listaProductos.length)
             return null;
