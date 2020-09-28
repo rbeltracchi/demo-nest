@@ -32,5 +32,19 @@ export class ProductoService {
         if (index < 0 || index >= this.listaProductos.length)
             return null;
         return this.listaProductos[index];
+    }
+
+    public create(prod: any): string {
+        console.log(prod);
+        const producto = new Producto(prod.nombreProducto, prod.precio);
+
+        if (producto.getNombreProducto() && producto.getPrecio()) {
+            fs.appendFileSync('resources/productos.csv',
+            `\n${producto.getNombreProducto()},${producto.getPrecio()}`);
+
+            return "ok";
+        } else {
+            return "parametros incorrectos";
         }
+    }
 }
