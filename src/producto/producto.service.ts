@@ -47,4 +47,14 @@ export class ProductoService {
             return "parametros incorrectos";
         }
     }
+
+    public deleteProducto(index: number): boolean {
+        let borrado = this.listaProductos.splice(index,1); []
+        return borrado.length == 1;
+    }
+
+    //TAREA
+    private actualizarArchivo(){
+        //writeFile de this.listaProductos
+    }
 }
