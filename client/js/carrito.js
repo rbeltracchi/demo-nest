@@ -61,15 +61,33 @@ let obj = {
 
 function mostrarTablaCompras() {
     let html = "";
-    for (let r of compras) {
+    for (let i=0; i<compras.length; i++) {
+        r = compras[i];
         html += `
         <tr>
         <td>${r.nombreProducto}</td>
         <td>${r.precio}</td>
+        <td><button class="btn-delete-producto" pos="${i}">Borrar</button></td>
         </tr>
         `;
     }
     document.querySelector("#tblCompras").innerHTML = html;
+    let botonesBorrar = document.querySelectorAll(".btn-delete-producto");
+    botonesBorrar.forEach(boton => {
+        boton.addEventListener("click", btnBorrarClick());
+    });
+}
+
+async function btnBorrarClick(){
+    let pos = this.getAttribute("pos");
+    let response = await fetch(`/productos/${pos}`,{
+        method: "DELETE",
+        headers:{
+            "Content-Type": "application/json"
+        }
+    });
+    console.log(response);
+    load();
 }
 
 async function load() {
