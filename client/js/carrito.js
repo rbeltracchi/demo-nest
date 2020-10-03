@@ -63,18 +63,22 @@ function mostrarTablaCompras() {
     let html = "";
     for (let i=0; i<compras.length; i++) {
         r = compras[i];
-        html += `
-        <tr>
-        <td>${r.nombreProducto}</td>
-        <td>${r.precio}</td>
-        <td><button class="btn-delete-producto" pos="${i}">Borrar</button></td>
-        </tr>
-        `;
+        html += `<tr>
+                    <td><input type=”text” value=”${r.nombreProducto}” id="prod${i}"></td>
+                    <td><input type=”text” value=”${r.precio}” id="prec${i}"></td>
+                    <td><button class="btnUpdProd" pos="${i}">Actualizar</button></td>
+                    <td><button class="btn-delete-producto" pos="${i}">Borrar</button></td>
+                </tr>`;
+
     }
     document.querySelector("#tblCompras").innerHTML = html;
     let botonesBorrar = document.querySelectorAll(".btn-delete-producto");
+    let botonesUpd = document.querySelectorAll(".btnUpdProd");
     botonesBorrar.forEach(boton => {
-        boton.addEventListener("click", btnBorrarClick());
+        boton.addEventListener("click", btnBorrarClick);
+    });
+    botonesUpd.forEach(boton => {
+        boton.addEventListener("click", btnUpdClick);
     });
 }
 
@@ -86,8 +90,25 @@ async function btnBorrarClick(){
             "Content-Type": "application/json"
         }
     });
-    console.log(response);
+    console.log("borrando elemento pos " + pos );
     load();
+}
+
+async function btnUpdClick(){
+    let pos = this.getAttribute("pos");
+    let renglon = {
+        "nombreProducto": document.getElementById(`prod${pos}`).value,
+        "precio": document.getElementById(`prec${pos}`).value
+    }
+    let response = await fetch(`/productos/${pos}`,{
+        method: "PUT",
+        headers:{
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(renglon)
+    });
+    console.log("Actualizamos elemento pos " + pos );
+    mostrarTablaCompras();
 }
 
 async function load() {

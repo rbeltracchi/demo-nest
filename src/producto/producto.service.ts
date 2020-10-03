@@ -53,6 +53,12 @@ export class ProductoService {
         return borrado.length == 1;
     }
 
+    public updateProducto(pos: number, prod: any): boolean {
+        const producto = new Producto(prod.nombreProducto, prod.precio);
+        this.listaProductos[pos] = producto;
+        return true;
+    }
+    
     //TAREA
     private actualizarArchivo(){
         //writeFile de this.listaProductos
