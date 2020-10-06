@@ -6,7 +6,7 @@ import { Body } from '@nestjs/common/decorators/http/route-params.decorator';
 import { Producto } from './Producto';
 import { ProductoService } from './producto.service';
 
-@Controller('productos')
+@Controller('productos') //localhost:3000/productos
 export class ProductoController {
     constructor(private productoService: ProductoService) { }
     @Get()
