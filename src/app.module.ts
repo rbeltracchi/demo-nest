@@ -7,14 +7,18 @@ import { ProductoController } from './producto/producto.controller';
 import { ProductoService } from './producto/producto.service';
 import { CalcularController } from './calcular/calcular.controller';
 import { CalcularService } from './calcular/calcular.service';
+import { ProductoModule } from './producto/producto.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
     ServeStaticModule.forRoot({
     rootPath: join(__dirname, '..', 'client'),
     }),
+    TypeOrmModule.forRoot(),
+    ProductoModule
   ],
-  controllers: [AppController, ProductoController, CalcularController],
-  providers: [AppService, ProductoService, CalcularService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
