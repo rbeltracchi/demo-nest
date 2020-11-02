@@ -4,7 +4,7 @@ export class Producto{
     
     constructor(nombre:string, precio:number){
         this.nombreProducto=nombre;
-        this.precio=precio;
+        this.precio=Number(precio);
     }
 
     public getNombreProducto(): string {
@@ -18,7 +18,7 @@ export class Producto{
         return this.precio;
     }
     public setPrecio(value: number) {
-        this.precio = value;
+        this.precio = Number(value);
     }
 
 }
