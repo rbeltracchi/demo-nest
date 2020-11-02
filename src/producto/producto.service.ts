@@ -1,15 +1,25 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import * as fs from 'fs';
+import { Repository } from 'typeorm';
+import { Prod } from './entities/productos.entity';
 import { Producto } from './Producto';
 
 
 
 @Injectable()
 export class ProductoService {
+
     private listaProductos: Producto[];
     private productosFilePath: string = 'resources/productos.csv';
 
+    constructor(
+        @InjectRepository(Prod)
+        private readonly prodRepository: Repository<Prod>
+    ){ }
+
     private loadProductos(): void {
+        
         let archivo = fs.readFileSync(this.productosFilePath, 'utf8');
         const elementos = archivo.split('\n')
             .map(p => p.replace('\r', '')).map(p => p.split(','));
