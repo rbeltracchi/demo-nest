@@ -7,6 +7,8 @@ import { ProductoController } from './producto/producto.controller';
 import { ProductoService } from './producto/producto.service';
 import { CalcularController } from './calcular/calcular.controller';
 import { CalcularService } from './calcular/calcular.service';
+import { LoginService } from './login/login.service';
+import { LoginController } from './login/login.controller';
 
 @Module({
   imports: [
@@ -14,7 +16,7 @@ import { CalcularService } from './calcular/calcular.service';
     rootPath: join(__dirname, '..', 'client'),
     }),
   ],
-  controllers: [AppController, ProductoController, CalcularController],
-  providers: [AppService, ProductoService, CalcularService],
+  controllers: [AppController, ProductoController, CalcularController, LoginController],
+  providers: [AppService, ProductoService, CalcularService, LoginService],
 })
 export class AppModule {}
