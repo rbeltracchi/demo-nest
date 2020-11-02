@@ -7,6 +7,8 @@ import { ProductoController } from './producto/producto.controller';
 import { ProductoService } from './producto/producto.service';
 import { CalcularController } from './calcular/calcular.controller';
 import { CalcularService } from './calcular/calcular.service';
+import { LoginService } from './login/login.service';
+import { LoginController } from './login/login.controller';
 import { ProductoModule } from './producto/producto.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -18,7 +20,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     TypeOrmModule.forRoot(),
     ProductoModule
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, LoginController],
+  providers: [AppService, LoginService],
 })
 export class AppModule {}
